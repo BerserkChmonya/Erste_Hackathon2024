@@ -6,6 +6,7 @@ df = pd.read_csv('Erste_Datasets/Organizations.csv')
 # Select only the 'name' column
 df = df['name']
 
+
 def search_companies(query):
     # Convert the query to lowercase for case-insensitive search
     query = query.lower()
@@ -15,6 +16,7 @@ def search_companies(query):
 
     # Return the result (filtered rows)
     return result
+
 
 # Example: User input for search query
 query = input("Enter search term: ")
