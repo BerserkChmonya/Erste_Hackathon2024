@@ -24,32 +24,32 @@
 
     // Define the data for the chart
     const lineChartData = {
-        labels: data[name].months, // X-axis (months)
+        labels: data[name].months, 
         datasets: [
             {
-                label: name,               // Label for the dataset
-                data: data[name].y, // Y-axis (amounts)
+                label: name,            
+                data: data[name].y, 
                 borderWidth: 2,
-                fill: true,                     // Fill under the line
-                tension: 0.3,                   // Smooth the line
+                fill: true,                   
+                tension: 0.3,                
                 segment: {
                     // Custom segment logic based on data point index
                     borderColor: (ctx) => {
-                        const index = ctx.p0DataIndex; // Get the starting index of the segment
-                        const currentMonthIndex = 5; // Example: Current month is June (index 5)
+                        const index = ctx.p0DataIndex; 
+                        const currentMonthIndex = 2; 
                         
                         return index < currentMonthIndex ? 'rgba(54, 162, 235, 1)' : 'rgba(255, 99, 132, 1)';
                     },
                     backgroundColor: (ctx) => {
                         const index = ctx.p0DataIndex;
-                        const currentMonthIndex = 5;
+                        const currentMonthIndex = 2;
                         
                         return index < currentMonthIndex ? 'rgba(54, 162, 235, 0.2)' : 'rgba(255, 99, 132, 0.2)';
                     },
                     borderDash: (ctx) => {
                         const index = ctx.p0DataIndex;
-                        const currentMonthIndex = 5;
-                        return index < currentMonthIndex ? [] : [6, 6]; // Solid before current month, dashed after
+                        const currentMonthIndex = 2;
+                        return index < currentMonthIndex ? [] : [6, 6]; 
                     }
                 },
             }
@@ -68,13 +68,13 @@
                     // Vertical dashed line at the current month
                     line1: {
                         type: 'line',
-                        xMin: 5,   // Position the line at the current month (June)
-                        xMax: 5,
-                        borderColor: 'black',      // Line color
+                        xMin: 2,   
+                        xMax: 2,
+                        borderColor: 'black',    
                         borderWidth: 2,
-                        borderDash: [5, 5],        // Dashed line pattern
+                        borderDash: [5, 5],    
                         label: {
-                            content: 'Now',          // Label text for the line
+                            content: 'Now',     
                             enabled: true,
                             position: 'top'
                         }
