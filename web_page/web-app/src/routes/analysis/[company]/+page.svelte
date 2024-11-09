@@ -2,6 +2,8 @@
     import GraphCard from '$lib/components/cards/GraphCard.svelte';
     import * as Card from "$lib/components/ui/card";
     import PairsCard from '$lib/components/cards/PairsCard.svelte';
+    import ArrangementCard from '$lib/components/cards/ArrangementCard.svelte';
+    import {Button} from '$lib/components/ui/button/index.js';
 
     export let data;
 
@@ -13,10 +15,26 @@
 
     let selectedValue = data.selectedValue;
     let bestToSellData = data.bestToSellData;
-    
-    // console.log(bestToSellData);
-    // console.log('-----------------');
-    // console.log(predictionsData[2]);
+
+    $: product_index = 2;
+
+    function increment() {
+        if (product_index >= predictionsData.length - 1) {
+            product_index = 0;
+        }
+        else {
+            product_index += 1;
+        }
+    }
+
+    function decrement() {
+        if (product_index <= 0) {
+            product_index = predictionsData.length - 1;
+        }
+        else {
+            product_index -= 1;
+        }
+    }
 
 
     // Handle the selection change event from GraphCard
@@ -42,14 +60,24 @@
                 </Tabs.List>
                 <Tabs.Content value="forecast">
                     <div class="mt-4">
-                        <GraphCard data={predictionsData[2]} on:selectionChange={handleSelectionChange}/>
+                        {#key product_index}
+                        <GraphCard data={predictionsData[product_index]} on:selectionChange={handleSelectionChange}/>
+                        {/key}
+                        <div class="w-full flex flex-row  justify-between mt-3">
+                            <Button variant="outline" on:click={decrement}>Previous</Button>
+                            <Button variant="outline" on:click={increment}>Next</Button>
+                        </div>
+                        
                     </div>
                 </Tabs.Content>
                 <Tabs.Content value="pairs">
                     <PairsCard data={pairsData} />
                 </Tabs.Content>
                 <Tabs.Content value="arrange">
+                    <ArrangementCard data={bestToSellData} items={popularProductsData}/>
+                    <div class="">
 
+                    </div>
                 </Tabs.Content>
               </Tabs.Root>
             </div>
@@ -58,7 +86,9 @@
         <div class="w-full mt-4">
             <Card.Root>
                 <Card.Header>
-                    
+                    <div class="w-full flex items-center justify-center text-5xl">
+                        Recomendations
+                    </div>
                 </Card.Header>
                 <Card.Content>
                     
