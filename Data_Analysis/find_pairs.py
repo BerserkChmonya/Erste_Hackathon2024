@@ -32,61 +32,51 @@ import matplotlib.pyplot as plt
 
 # Load data
 organizations_df = pd.read_csv('Erste_Datasets/Organizations.csv')
-product_items_df = pd.read_csv('Erste_Datasets/ProductItems.csv')
+product_items = pd.read_csv('Erste_Datasets/ProductItems.csv')
 products_df = pd.read_csv('Erste_Datasets/Products.csv')
 receipts_df = pd.read_csv('Erste_Datasets/Receipts.csv')
 
-product_items_df = product_items_df.rename(columns={'fs_receipt_id': 'receipt_id'})
 
-store_names_map = organizations_df.set_index('id')['name'].to_dict()
+def get_pairs(organization_name):
+    product_items_df = product_items.rename(columns={'fs_receipt_id': 'receipt_id'})
 
-item_names_with_receipts = pd.merge(
-    product_items_df[['receipt_id', 'product_id']],
-    products_df[['id', 'name']],
-    left_on='product_id',
-    right_on='id',
-    how='left'
-).rename(columns={'name': 'item_name'})
+    store_names_map = organizations_df.set_index('id')['name'].to_dict()
 
-item_names_with_receipts = pd.merge(
-    item_names_with_receipts,
-    receipts_df[['id', 'organization_id']],
-    left_on='receipt_id',
-    right_on='id',
-    how='left'
-)
+    item_names_with_receipts = pd.merge(
+        product_items_df[['receipt_id', 'product_id']],
+        products_df[['id', 'name']],
+        left_on='product_id',
+        right_on='id',
+        how='left'
+    ).rename(columns={'name': 'item_name'})
 
-item_names_with_receipts['organization_name'] = item_names_with_receipts['organization_id'].map(store_names_map)
-
-lidl_data = item_names_with_receipts[item_names_with_receipts['organization_name'] == "Lidl Slovenská republika, s.r.o."]
-
-pairs = []
-for receipt_id, group in lidl_data.groupby('receipt_id'):
-    items = group['item_name'].tolist()
-    pairs.extend(combinations(sorted(items), 2))
-
-pair_counts = Counter(pairs)
-top_10_pairs = pair_counts.most_common(10)
-
-total_lidl_receipts = lidl_data['receipt_id'].nunique()
-
-items = [f"{item1.strip()} & {item2.strip()}" for (item1, item2), _ in top_10_pairs]
-counts = [count for _, count in top_10_pairs]
-percentages = [(count / total_lidl_receipts) * 100 for count in counts]
-
-plt.figure(figsize=(12, 8))
-bars = plt.barh(items, counts, color='skyblue')
-plt.xlabel("Frequency")
-plt.title("Top 10 Most Frequently Purchased Item Pairs in Lidl Slovenská republika, s.r.o.")
-plt.gca().invert_yaxis()
-
-for bar, percent in zip(bars, percentages):
-    plt.text(
-        bar.get_width() + 1, bar.get_y() + bar.get_height() / 2,
-        f"{percent:.1f}%", va='center'
+    item_names_with_receipts = pd.merge(
+        item_names_with_receipts,
+        receipts_df[['id', 'organization_id']],
+        left_on='receipt_id',
+        right_on='id',
+        how='left'
     )
 
-plt.xticks(fontsize=10)
-plt.yticks(fontsize=9)
-plt.tight_layout()
-plt.show()
+    item_names_with_receipts['organization_name'] = item_names_with_receipts['organization_id'].map(store_names_map)
+
+    lidl_data = item_names_with_receipts[item_names_with_receipts['organization_name'] == organization_name]
+
+    pairs = []
+    for receipt_id, group in lidl_data.groupby('receipt_id'):
+        items = group['item_name'].tolist()
+        pairs.extend(combinations(sorted(items), 2))
+
+    pair_counts = Counter(pairs)
+    top_10_pairs = pair_counts.most_common(10)
+
+    total_lidl_receipts = lidl_data['receipt_id'].nunique()
+
+    items = [f"{item1.strip()} & {item2.strip()}" for (item1, item2), _ in top_10_pairs]
+    counts = [count for _, count in top_10_pairs]
+    percentages = [(count / total_lidl_receipts) * 100 for count in counts]
+
+    return {'items': items, 'counts': counts, 'percentages': percentages}
+
+
+print(get_pairs('Lidl Slovenská republika, s.r.o.'))

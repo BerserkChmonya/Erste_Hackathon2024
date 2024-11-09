@@ -1,7 +1,7 @@
 <script lang="ts">
     import * as Card from "$lib/components/ui/card";
     import Chart from '$lib/components/Chart.svelte';
-    import Combobox from '$lib/components/Combobox.svelte';
+    // import Combobox from '$lib/components/Combobox.svelte';
     import annotationPlugin from 'chartjs-plugin-annotation';
     import Chartjs from 'chart.js/auto';
     import { createEventDispatcher } from 'svelte';
@@ -15,17 +15,20 @@
     }
 
     export let data;
+    let name = Object.keys(data)[0];
+    console.log('\n\ndata')
+    console.log(data[name].months)
 
     // Register the annotation plugin
     Chartjs.register(annotationPlugin);
 
     // Define the data for the chart
     const lineChartData = {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // X-axis (months)
+        labels: data[name].months, // X-axis (months)
         datasets: [
             {
-                label: 'Sales',               // Label for the dataset
-                data: [120, 150, 180, 200, 170, 220, 250, 100, 300, 200, 190, 230], // Y-axis (amounts)
+                label: name,               // Label for the dataset
+                data: data[name].y, // Y-axis (amounts)
                 borderWidth: 2,
                 fill: true,                     // Fill under the line
                 tension: 0.3,                   // Smooth the line
@@ -58,7 +61,7 @@
         responsive: true,
         plugins: {
             legend: {
-                display: false,
+                display: true,
             },
             annotation: {
                 annotations: {
@@ -128,9 +131,9 @@
         <div class="w-full h-full border-2 rounded-lg">
             <Chart {lineChartData} {lineChartOptions} />
         </div>
-        <div class="mt-4">
+        <!-- <div class="mt-4">
             <Combobox {ComboboxData} company={data.company} selectedValue={data.selectedValue}
             on:selectionChange={(e) => handleSelectionChange(e.detail)}/>
-        </div>
+        </div> -->
     </Card.Content>
 </Card.Root>
