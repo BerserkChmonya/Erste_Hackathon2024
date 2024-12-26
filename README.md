@@ -61,10 +61,6 @@ The system accepts a set of structured datasets as input, including:
 
 Example schemas of the datasets are included in the repository for testing and reference.
 
-## Figma Board
-
-Figma board is available here : [Figma](https://www.figma.com/design/EbbiwoaEZSHuJ8mch2TWOx/Supermarket-insights?t=JnNmF3OOyexQ6d1P-1)
-
 ## Benefits
 
 - Automated analysis of purchasing patterns.
@@ -73,8 +69,10 @@ Figma board is available here : [Figma](https://www.figma.com/design/EbbiwoaEZSH
 - Scalable model suitable for stores of all sizes.
 
 ## Pptx Presentation
+Presentation is available here : [PPTX](https://github.com/BerserkChmonya/Erste_Hackathon2024/tree/main/presentation)
 
-
+## Figma Board
+Figma board is available here : [Figma](https://www.figma.com/design/EbbiwoaEZSHuJ8mch2TWOx/Supermarket-insights?t=JnNmF3OOyexQ6d1P-1)
 
 ## Current State
 
