@@ -1,14 +1,39 @@
 # Erste_Hackathon2024
 
+
+<p align="center">
+  <img src="images/photo_2_2024-12-26_17-18-56.jpg" alt="Image 1" width="60%">
+  <img src="images/photo_3_2024-12-26_17-18-56.jpg" alt="Image 1" width="30%">
+</p>
+
+
 ## Overview
 
 Our system is designed to optimize store operations by leveraging data-driven insights for inventory management, customer experience, sales optimization, and operational efficiency. By analyzing purchasing patterns and automating key tasks, our platform empowers store owners to enhance their store's performance without the need for costly consultants.
 
+> **Note**: This entire project was developed in approximately 18 hours, showcasing the team's ability to rapidly prototype and deliver impactful solutions.
+
+
 ## Features
 
 - **Demand Forecast**: Predict future sales to optimize inventory levels, reduce stockouts, and ensure popular items are always available.
+<p align="center">
+  <img src="images/photo_8_2024-12-26_17-18-56.jpg" alt="Image 1" width="60%">
+  <img src="images/photo_1_2024-12-26_17-18-56.jpg" alt="Image 1" width="30%">
+</p>
+
 - **Product Pairs**: Identify frequently bought-together items to create effective discount bundles, improve customer satisfaction, and encourage higher basket values.
+
+<p align="center">
+  <img src="images/photo_7_2024-12-26_17-18-56.jpg" alt="Image 1" width="60%">
+  <img src="images/photo_5_2024-12-26_17-18-56.jpg" alt="Image 1 "width="30%">
+</p>
 - **Arrangement System**: Optimize product placement using behavioral merchandising for enhanced customer engagement and increased sales.
+
+<p align="center">
+  <img src="images/photo_6_2024-12-26_17-18-56.jpg" alt="Image 1" width="60%">
+  <img src="images/photo_4_2024-12-26_17-18-56.jpg" alt="Image 1" width="30%">
+</p>
 
 ## Technology Stack
 
@@ -36,12 +61,20 @@ The system accepts a set of structured datasets as input, including:
 
 Example schemas of the datasets are included in the repository for testing and reference.
 
+## Figma Board
+
+Figma board is available here : [Figma](https://www.figma.com/design/EbbiwoaEZSHuJ8mch2TWOx/Supermarket-insights?t=JnNmF3OOyexQ6d1P-1)
+
 ## Benefits
 
 - Automated analysis of purchasing patterns.
 - Optimized product placement and targeted discount strategies.
 - Affordable, easy-to-use solution with intuitive navigation.
 - Scalable model suitable for stores of all sizes.
+
+## Pptx Presentation
+
+
 
 ## Current State
 
